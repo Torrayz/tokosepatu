@@ -10,7 +10,7 @@ import Link from 'next/link'
 import {
   ChevronRight, ShoppingBag, Heart, Star,
   Truck, ShieldCheck, RefreshCw, Loader2,
-  Plus, Minus, Share2
+  Plus, Minus
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { ProductCard } from '@/components/product/ProductCard'
@@ -77,7 +77,7 @@ export function ProductDetailClient({ product, relatedProducts }: Props) {
           {/* ── Gambar ── */}
           <div className="space-y-4 lg:sticky lg:top-24">
             {/* Main Image */}
-            <div className="relative overflow-hidden rounded-3xl bg-gray-50 aspect-square group">
+            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-tr from-gray-100 to-white aspect-square group border border-gray-100/50 shadow-inner">
               <Image
                 src={mainImage}
                 alt={product.name}
@@ -123,25 +123,26 @@ export function ProductDetailClient({ product, relatedProducts }: Props) {
             {/* Header */}
             <div>
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs font-semibold uppercase tracking-widest text-gray-400 bg-gray-100 px-3 py-1 rounded-full">
+                <span className="text-xs font-bold uppercase tracking-widest text-gray-500 bg-white border border-gray-200 px-3 py-1 rounded-full shadow-sm">
                   {product.category?.name}
                 </span>
                 {/* Rating dummy */}
-                <div className="flex items-center gap-1 text-amber-400">
-                  {[1,2,3,4,5].map(i => (
-                    <Star key={i} className={`w-3.5 h-3.5 ${i <= 4 ? 'fill-amber-400' : 'fill-gray-200 text-gray-200'}`} />
-                  ))}
-                  <span className="text-xs text-gray-400 ml-1">(128 ulasan)</span>
+                <div className="flex items-center gap-1 text-amber-400 bg-amber-50 px-2 py-1 rounded-full border border-amber-100">
+                  <Star className="w-3.5 h-3.5 fill-amber-400" />
+                  <span className="text-xs font-bold text-amber-700">4.9</span>
+                  <span className="text-xs text-amber-600/70 ml-1">(128 ulasan)</span>
                 </div>
               </div>
-              <h1 className="font-heading text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
+              <h1 className="font-heading text-4xl md:text-5xl font-black text-[#0A0A0A] leading-[1.1] tracking-tight">
                 {product.name}
               </h1>
-              <div className="flex items-center gap-4 mt-4">
-                <p className="font-extrabold text-3xl text-[#0A0A0A]">{formatRupiah(product.price)}</p>
+              <div className="flex items-center gap-4 mt-6">
+                <p className="font-black text-4xl text-[#0A0A0A] tracking-tight">{formatRupiah(product.price)}</p>
                 {/* Harga coret dummy */}
-                <p className="text-lg text-gray-400 line-through">{formatRupiah(Math.round(product.price * 1.15))}</p>
-                <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded-full">-15%</span>
+                <div className="flex flex-col">
+                  <p className="text-sm text-gray-400 line-through font-semibold">{formatRupiah(Math.round(product.price * 1.15))}</p>
+                  <span className="text-red-500 text-[10px] font-black uppercase tracking-wider">Hemat 15%</span>
+                </div>
               </div>
             </div>
 
@@ -186,31 +187,33 @@ export function ProductDetailClient({ product, relatedProducts }: Props) {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex gap-3 border-t border-gray-100 pt-5">
-              <button
-                onClick={handleAddToCart}
-                disabled={isAdding || !hasStock}
-                className="flex-1 py-4 rounded-2xl bg-[#0A0A0A] text-[#E8FF3A] font-bold hover:opacity-90 transition-all disabled:opacity-40 flex items-center justify-center gap-2 shadow-lg shadow-black/10"
-              >
-                {isAdding ? (
-                  <><Loader2 className="w-4 h-4 animate-spin" /> Menambahkan...</>
-                ) : (
-                  <><ShoppingBag className="w-4 h-4" /> Tambah ke Keranjang</>
-                )}
-              </button>
-              <button
-                onClick={() => setWishlist(!wishlist)}
-                className={`w-14 h-14 rounded-2xl border-2 flex items-center justify-center transition-all ${
-                  wishlist
-                    ? 'border-red-400 bg-red-50 text-red-500'
-                    : 'border-gray-200 hover:border-gray-300 text-gray-500'
-                }`}
-              >
-                <Heart className={`w-5 h-5 ${wishlist ? 'fill-red-400' : ''}`} />
-              </button>
-              <button className="w-14 h-14 rounded-2xl border-2 border-gray-200 hover:border-gray-300 flex items-center justify-center text-gray-500 transition-all">
-                <Share2 className="w-5 h-5" />
-              </button>
+            <div className="flex flex-col gap-3 border-t border-gray-100 pt-6">
+              <div className="flex gap-3">
+                <button
+                  onClick={handleAddToCart}
+                  disabled={isAdding || !hasStock}
+                  className="flex-1 py-4 rounded-2xl bg-[#E8FF3A] text-[#0A0A0A] font-black uppercase tracking-widest text-sm hover:bg-[#d4e832] transition-colors disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-xl shadow-[#E8FF3A]/20"
+                >
+                  {isAdding ? (
+                    <><Loader2 className="w-5 h-5 animate-spin" /> Sedang Menambahkan...</>
+                  ) : (
+                    <><ShoppingBag className="w-5 h-5" /> Masukkan Keranjang</>
+                  )}
+                </button>
+                <button
+                  onClick={() => setWishlist(!wishlist)}
+                  className={`w-[60px] h-[60px] rounded-2xl border-2 flex items-center justify-center transition-all shrink-0 ${
+                    wishlist
+                      ? 'border-red-400 bg-red-50 text-red-500 shadow-inner'
+                      : 'border-gray-200 hover:border-gray-300 text-gray-400 hover:text-red-400 bg-white shadow-sm'
+                  }`}
+                >
+                  <Heart className={`w-6 h-6 transition-transform ${wishlist ? 'fill-red-400 scale-110' : 'hover:scale-110'}`} />
+                </button>
+              </div>
+              <p className="text-center text-xs font-bold text-green-600 bg-green-50 py-2 rounded-xl border border-green-100">
+                ✨ Pesanan sebelum jam 15:00 akan dikirim hari ini
+              </p>
             </div>
 
             {/* Keunggulan */}
