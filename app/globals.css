@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  @apply bg-background text-foreground;
+}
+
+body {
+  @apply font-sans;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-heading font-bold;
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2.5 rounded-button bg-primary text-background font-medium text-sm hover:opacity-90 transition-opacity;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2.5 rounded-button bg-secondary text-primary font-medium text-sm hover:opacity-90 transition-opacity;
+  }
+
+  .btn-outline {
+    @apply px-4 py-2.5 rounded-button border border-border text-primary font-medium text-sm hover:bg-muted transition-colors;
+  }
+
+  .badge {
+    @apply inline-block px-3 py-1 rounded-badge text-xs font-semibold;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary text-background;
+  }
+
+  .badge-secondary {
+    @apply badge bg-secondary text-primary;
+  }
+
+  .badge-success {
+    @apply badge bg-success text-background;
+  }
+
+  .badge-error {
+    @apply badge bg-error text-background;
+  }
+
+  .card {
+    @apply rounded-card border border-border bg-background p-4;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
