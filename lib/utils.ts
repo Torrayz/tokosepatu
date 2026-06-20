@@ -5,13 +5,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    minimumFractionDigits: 0,
-  }).format(amount)
+export function formatRupiah(amount: number): string {
+  return 'Rp ' + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 }
+
+// Keep backward compat alias
+export const formatCurrency = formatRupiah
 
 export function formatDate(date: string | Date): string {
   return new Intl.DateTimeFormat('id-ID', {
@@ -30,4 +29,13 @@ export function generateSlug(text: string): string {
     .replace(/[^\w\s-]/g, '')
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
+}
+
+export function generateOrderId(uuid: string): string {
+  return '#STR-' + uuid.substring(0, 8).toUpperCase()
+}
+
+export function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text
+  return text.substring(0, maxLength) + '...'
 }

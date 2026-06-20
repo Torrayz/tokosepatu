@@ -1,6 +1,6 @@
 'use client'
 
-import { ProductSize } from '@/types'
+import type { ProductSize } from '@/types'
 
 interface SizeSelectorProps {
   sizes: ProductSize[]
@@ -12,38 +12,32 @@ export function SizeSelector({ sizes, selectedSize, onSelectSize }: SizeSelector
   return (
     <div className="space-y-3">
       <label className="block font-heading font-bold text-sm">Pilih Ukuran</label>
-      <div className="grid grid-cols-4 gap-2">
-        {sizes.map((size) => {
-          const isAvailable = size.stock > 0
-          const isSelected = selectedSize === size.size
-          const isLowStock = size.stock > 0 && size.stock <= 5
-
+      <div className="grid grid-cols-7 gap-2">
+        {sizes.map((s) => {
+          const isOutOfStock = s.stock === 0
           return (
             <button
-              key={size.id}
-              onClick={() => isAvailable && onSelectSize(size.size)}
-              disabled={!isAvailable}
-              className={`py-3 rounded-button font-medium text-sm transition ${
-                isSelected
-                  ? 'bg-primary text-background border-2 border-primary'
-                  : isAvailable
-                  ? 'border-2 border-border text-foreground hover:border-primary'
-                  : 'border-2 border-border text-gray-400 bg-gray-50 cursor-not-allowed'
+              key={s.size}
+              onClick={() => !isOutOfStock && onSelectSize(s.size)}
+              disabled={isOutOfStock}
+              className={`py-2 rounded-button border text-sm font-medium transition ${
+                selectedSize === s.size
+                  ? 'bg-primary text-background border-primary'
+                  : isOutOfStock
+                  ? 'bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed line-through'
+                  : 'border-border hover:border-primary'
               }`}
             >
-              <div className="text-center">
-                <div className="text-base">{size.size}</div>
-                {isLowStock && (
-                  <div className="text-xs text-warning">Sisa {size.stock}</div>
-                )}
-                {!isAvailable && (
-                  <div className="text-xs text-error">Habis</div>
-                )}
-              </div>
+              {s.size}
             </button>
           )
         })}
       </div>
+      {selectedSize && (
+        <p className="text-xs text-gray-500">
+          Stok tersisa: {sizes.find((s) => s.size === selectedSize)?.stock || 0}
+        </p>
+      )}
     </div>
   )
 }

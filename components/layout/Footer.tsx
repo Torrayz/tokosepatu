@@ -63,7 +63,7 @@ export function Footer() {
         {/* Divider */}
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-            <p>&copy; 2024 STRYDE. Semua hak dilindungi.</p>
+            <p>&copy; 2025 STRYDE. Semua hak dilindungi.</p>
             <div className="flex gap-6 mt-4 md:mt-0">
               <a href="#" className="hover:text-primary transition">Kebijakan Privasi</a>
               <a href="#" className="hover:text-primary transition">Syarat Layanan</a>

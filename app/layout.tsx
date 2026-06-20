@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 const jakarta = Plus_Jakarta_Sans({
@@ -16,10 +17,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'STRYDE - Walk Your Way',
-  description: 'Indonesian shoe brand with the tagline "Walk Your Way". Shop premium sneakers, casual, formal, sandals, and boots.',
+  description: 'STRYDE adalah platform e-commerce sepatu lokal Indonesia. Temukan koleksi sneakers, casual, formal, sandal, dan boots premium.',
   openGraph: {
     title: 'STRYDE - Walk Your Way',
-    description: 'Premium Indonesian shoe brand',
+    description: 'Platform e-commerce sepatu premium Indonesia',
     type: 'website',
   },
 }
@@ -30,9 +31,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="bg-background">
+    <html lang="id" className="bg-background">
       <body className={`${jakarta.variable} ${inter.variable}`}>
         {children}
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   )

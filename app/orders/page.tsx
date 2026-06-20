@@ -1,77 +1,129 @@
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
+import { getOrders } from '@/lib/actions/order'
+import { OrderStatusBadge } from '@/components/order/OrderStatusBadge'
+import { formatRupiah, formatDate, generateOrderId } from '@/lib/utils'
 import Link from 'next/link'
-import { formatCurrency, formatDate } from '@/lib/utils'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight, Package, ShoppingBag } from 'lucide-react'
+import type { OrderStatus } from '@/types'
 
-const mockOrders = [
-  {
-    id: 'STR20240620001',
-    date: new Date().toISOString(),
-    total: 950000,
-    status: 'processing' as const,
-    items_count: 2,
-  },
-  {
-    id: 'STR20240619001',
-    date: new Date(Date.now() - 86400000).toISOString(),
-    total: 450000,
-    status: 'delivered' as const,
-    items_count: 1,
-  },
-]
-
-const statusColors = {
-  pending: 'bg-gray-100 text-gray-800',
-  awaiting_payment: 'bg-yellow-100 text-yellow-800',
-  payment_uploaded: 'bg-blue-100 text-blue-800',
-  payment_confirmed: 'bg-cyan-100 text-cyan-800',
-  processing: 'bg-purple-100 text-purple-800',
-  shipped: 'bg-orange-100 text-orange-800',
-  delivered: 'bg-green-100 text-green-800',
-  cancelled: 'bg-red-100 text-red-800',
+interface PageProps {
+  searchParams: { status?: string }
 }
 
-export default function OrdersPage() {
+const statusTabs = [
+  { label: 'Semua', value: 'all' },
+  { label: 'Menunggu', value: 'awaiting_payment' },
+  { label: 'Diproses', value: 'processing' },
+  { label: 'Dikirim', value: 'shipped' },
+  { label: 'Selesai', value: 'delivered' },
+  { label: 'Dibatalkan', value: 'cancelled' },
+]
+
+const statusIcon: Record<string, string> = {
+  awaiting_payment: '⏳',
+  payment_uploaded: '📤',
+  payment_confirmed: '✅',
+  processing: '⚙️',
+  shipped: '🚚',
+  delivered: '📦',
+  cancelled: '❌',
+  pending: '🕐',
+}
+
+export default async function OrdersPage({ searchParams }: PageProps) {
+  const status = searchParams.status || 'all'
+  const orders = await getOrders(status)
+
   return (
     <>
       <Navbar />
+      <main className="min-h-screen bg-gray-50">
+        {/* Header */}
+        <div className="bg-white border-b border-gray-100">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-[#0A0A0A] rounded-xl flex items-center justify-center">
+                <Package className="w-5 h-5 text-[#E8FF3A]" />
+              </div>
+              <div>
+                <h1 className="font-black text-2xl text-gray-900">Pesanan Saya</h1>
+                <p className="text-sm text-gray-500">{orders.length} pesanan ditemukan</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <main className="min-h-screen">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="font-heading text-3xl font-bold mb-8">Pesanan Saya</h1>
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8">
+          {/* Status Filter */}
+          <div className="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-hide">
+            {statusTabs.map((tab) => (
+              <Link
+                key={tab.value}
+                href={`/orders?status=${tab.value}`}
+                className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
+                  status === tab.value
+                    ? 'bg-[#0A0A0A] text-[#E8FF3A] shadow-sm'
+                    : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                {tab.label}
+              </Link>
+            ))}
+          </div>
 
-          {mockOrders.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-600 mb-4">Kamu belum memiliki pesanan</p>
-              <Link href="/products" className="btn-secondary inline-block">
-                Mulai Belanja
+          {/* Empty State */}
+          {orders.length === 0 ? (
+            <div className="text-center py-20 bg-white rounded-2xl border border-gray-100">
+              <div className="w-20 h-20 bg-gray-100 rounded-3xl flex items-center justify-center mx-auto mb-5">
+                <ShoppingBag className="w-10 h-10 text-gray-300" />
+              </div>
+              <h2 className="font-bold text-lg text-gray-900 mb-2">Belum Ada Pesanan</h2>
+              <p className="text-gray-500 text-sm mb-6">Mulai belanja dan temukan sepatu impianmu!</p>
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-2 bg-[#0A0A0A] text-[#E8FF3A] font-bold px-6 py-3 rounded-xl hover:opacity-90 transition"
+              >
+                Belanja Sekarang
               </Link>
             </div>
           ) : (
             <div className="space-y-4">
-              {mockOrders.map((order) => (
+              {orders.map((order) => (
                 <Link
                   key={order.id}
                   href={`/orders/${order.id}`}
-                  className="card flex items-center justify-between hover:border-primary transition group"
+                  className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-gray-200 transition-all p-6 flex items-center gap-5 group"
                 >
-                  <div className="flex-1">
-                    <div className="flex items-center gap-4 mb-2">
-                      <p className="font-heading font-bold">{order.id}</p>
-                      <span className={`text-xs font-semibold px-3 py-1 rounded-badge capitalize ${statusColors[order.status]}`}>
-                        {order.status.replace('_', ' ')}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600">
-                      {formatDate(order.date)} • {order.items_count} item
-                    </p>
+                  {/* Icon status */}
+                  <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-2xl shrink-0">
+                    {statusIcon[order.status] || '📋'}
                   </div>
-                  <div className="flex items-center gap-4">
-                    <p className="font-heading font-extrabold text-lg">
-                      {formatCurrency(order.total)}
+
+                  {/* Info */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-1.5 flex-wrap">
+                      <p className="font-black text-sm font-mono text-gray-900">{generateOrderId(order.id)}</p>
+                      <OrderStatusBadge status={order.status as OrderStatus} />
+                    </div>
+                    <p className="text-xs text-gray-400">
+                      {formatDate(order.created_at)} • {order.items?.length || 0} item •{' '}
+                      {order.payment_method === 'cod' ? 'Bayar di Tempat' : 'Transfer Bank'}
                     </p>
-                    <ChevronRight size={20} className="text-gray-400 group-hover:text-primary transition" />
+                    {/* Thumbnail items */}
+                    {order.items && order.items.length > 0 && (
+                      <p className="text-xs text-gray-500 mt-1 truncate">
+                        {order.items.slice(0, 2).map((i: { product_name: string; size: string; quantity: number }) =>
+                          `${i.product_name} (${i.size})`).join(', ')}
+                        {order.items.length > 2 && ` +${order.items.length - 2} lainnya`}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Total & Arrow */}
+                  <div className="flex items-center gap-3 shrink-0">
+                    <p className="font-black text-lg text-gray-900">{formatRupiah(order.total_amount)}</p>
+                    <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-gray-600 group-hover:translate-x-1 transition-all" />
                   </div>
                 </Link>
               ))}
@@ -79,7 +131,6 @@ export default function OrdersPage() {
           )}
         </div>
       </main>
-
       <Footer />
     </>
   )

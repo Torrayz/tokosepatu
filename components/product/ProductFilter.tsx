@@ -1,50 +1,50 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { ChevronDown, X } from 'lucide-react'
 
 const categories = [
-  { id: 'sneakers', name: 'Sneakers' },
-  { id: 'casual', name: 'Casual' },
-  { id: 'formal', name: 'Formal' },
-  { id: 'sandal', name: 'Sandal' },
-  { id: 'boots', name: 'Boots' },
+  { name: 'Semua', slug: '' },
+  { name: 'Sneakers', slug: 'sneakers' },
+  { name: 'Casual', slug: 'casual' },
+  { name: 'Formal', slug: 'formal' },
+  { name: 'Sandal', slug: 'sandal' },
+  { name: 'Boots', slug: 'boots' },
 ]
 
 const priceRanges = [
-  { id: 'all', label: 'Semua Harga' },
-  { id: '0-300000', label: '< Rp 300rb' },
-  { id: '300000-500000', label: 'Rp 300rb - 500rb' },
-  { id: '500000-800000', label: 'Rp 500rb - 800rb' },
-  { id: '800000+', label: '> Rp 800rb' },
+  { label: 'Semua Harga', value: 'all' },
+  { label: 'Di bawah Rp 300.000', value: '0-300000' },
+  { label: 'Rp 300.000 - Rp 500.000', value: '300000-500000' },
+  { label: 'Rp 500.000 - Rp 800.000', value: '500000-800000' },
+  { label: 'Di atas Rp 800.000', value: '800000+' },
 ]
 
+const sizes = ['38', '39', '40', '41', '42', '43', '44']
+
 const sortOptions = [
-  { id: 'newest', label: 'Terbaru' },
-  { id: 'price-asc', label: 'Harga Terendah' },
-  { id: 'price-desc', label: 'Harga Tertinggi' },
-  { id: 'name-asc', label: 'Nama (A - Z)' },
+  { label: 'Terbaru', value: 'newest' },
+  { label: 'Harga: Rendah ke Tinggi', value: 'price-asc' },
+  { label: 'Harga: Tinggi ke Rendah', value: 'price-desc' },
+  { label: 'Nama: A-Z', value: 'name-asc' },
 ]
 
 export function ProductFilter() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [showFilters, setShowFilters] = useState(false)
 
   const currentCategory = searchParams.get('category') || ''
   const currentPrice = searchParams.get('price') || 'all'
   const currentSort = searchParams.get('sort') || 'newest'
+  const currentSize = searchParams.get('size') || ''
 
-  const handleFilterChange = (filterType: string, value: string) => {
-    const params = new URLSearchParams(searchParams)
-    
-    if (value === 'all' || value === 'newest' || !value) {
-      params.delete(filterType)
+  const updateFilter = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString())
+    if (value) {
+      params.set(key, value)
     } else {
-      params.set(filterType, value)
+      params.delete(key)
     }
-
+    params.delete('page') // Reset page on filter change
     router.push(`/products?${params.toString()}`)
   }
 
@@ -52,100 +52,88 @@ export function ProductFilter() {
     router.push('/products')
   }
 
-  const hasFilters = currentCategory || currentPrice !== 'all' || currentSort !== 'newest'
+  const hasFilters = currentCategory || currentPrice !== 'all' || currentSize
 
   return (
-    <>
-      {/* Mobile Filter Toggle */}
-      <div className="md:hidden flex justify-between items-center mb-6 pb-4 border-b border-border">
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center gap-2 font-medium text-foreground"
-        >
-          <span>Filters</span>
-          <ChevronDown size={20} className={`transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+    <div className="space-y-6">
+      {hasFilters && (
+        <button onClick={clearFilters} className="text-sm text-error hover:opacity-70 transition">
+          ✕ Hapus semua filter
         </button>
-        {hasFilters && (
-          <button
-            onClick={clearFilters}
-            className="text-sm text-primary flex items-center gap-1 hover:opacity-70"
-          >
-            <X size={16} />
-            Clear
-          </button>
-        )}
+      )}
+
+      {/* Sort */}
+      <div>
+        <h3 className="font-heading font-bold text-sm mb-3">Urutkan</h3>
+        <select
+          value={currentSort}
+          onChange={(e) => updateFilter('sort', e.target.value)}
+          className="w-full border border-border rounded-button px-3 py-2 text-sm bg-background"
+        >
+          {sortOptions.map((opt) => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
+          ))}
+        </select>
       </div>
 
-      {/* Filter Panel */}
-      <div className={`${showFilters ? 'block' : 'hidden'} md:block space-y-6 pb-6 md:pb-0`}>
-        {/* Categories */}
-        <div>
-          <h3 className="font-heading font-bold text-sm mb-3">Kategori</h3>
-          <div className="space-y-2">
-            {categories.map((cat) => (
-              <label key={cat.id} className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={currentCategory === cat.id}
-                  onChange={(e) => handleFilterChange('category', e.target.checked ? cat.id : '')}
-                  className="w-4 h-4 accent-secondary cursor-pointer"
-                />
-                <span className="text-sm">{cat.name}</span>
-              </label>
-            ))}
-          </div>
+      {/* Category */}
+      <div>
+        <h3 className="font-heading font-bold text-sm mb-3">Kategori</h3>
+        <div className="flex flex-wrap gap-2">
+          {categories.map((cat) => (
+            <button
+              key={cat.slug}
+              onClick={() => updateFilter('category', cat.slug)}
+              className={`px-3 py-1.5 rounded-badge text-xs font-medium border transition ${
+                currentCategory === cat.slug
+                  ? 'bg-primary text-background border-primary'
+                  : 'border-border hover:border-primary'
+              }`}
+            >
+              {cat.name}
+            </button>
+          ))}
         </div>
-
-        {/* Price Range */}
-        <div>
-          <h3 className="font-heading font-bold text-sm mb-3">Harga</h3>
-          <div className="space-y-2">
-            {priceRanges.map((range) => (
-              <label key={range.id} className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  name="price"
-                  value={range.id}
-                  checked={currentPrice === range.id}
-                  onChange={() => handleFilterChange('price', range.id)}
-                  className="w-4 h-4 accent-secondary cursor-pointer"
-                />
-                <span className="text-sm">{range.label}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        {/* Sort */}
-        <div>
-          <h3 className="font-heading font-bold text-sm mb-3">Urutkan</h3>
-          <div className="space-y-2">
-            {sortOptions.map((option) => (
-              <label key={option.id} className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  name="sort"
-                  value={option.id}
-                  checked={currentSort === option.id}
-                  onChange={() => handleFilterChange('sort', option.id)}
-                  className="w-4 h-4 accent-secondary cursor-pointer"
-                />
-                <span className="text-sm">{option.label}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        {/* Clear Filters */}
-        {hasFilters && (
-          <button
-            onClick={clearFilters}
-            className="w-full btn-outline mt-4"
-          >
-            Reset Filter
-          </button>
-        )}
       </div>
-    </>
+
+      {/* Price */}
+      <div>
+        <h3 className="font-heading font-bold text-sm mb-3">Harga</h3>
+        <div className="space-y-2">
+          {priceRanges.map((range) => (
+            <label key={range.value} className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="price"
+                checked={currentPrice === range.value}
+                onChange={() => updateFilter('price', range.value)}
+                className="accent-primary"
+              />
+              <span className="text-sm">{range.label}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {/* Size */}
+      <div>
+        <h3 className="font-heading font-bold text-sm mb-3">Ukuran</h3>
+        <div className="grid grid-cols-4 gap-2">
+          {sizes.map((size) => (
+            <button
+              key={size}
+              onClick={() => updateFilter('size', currentSize === size ? '' : size)}
+              className={`py-1.5 rounded-button border text-xs font-medium transition ${
+                currentSize === size
+                  ? 'bg-primary text-background border-primary'
+                  : 'border-border hover:border-primary'
+              }`}
+            >
+              {size}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }

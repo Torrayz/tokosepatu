@@ -4,6 +4,29 @@
   --font-jakarta: 'Plus Jakarta Sans', sans-serif;
   --font-inter: 'Inter', sans-serif;
 }
+:root {
+  --color-primary: #0A0A0A;
+  --color-secondary: #E8FF3A;
+  --color-muted: #F5F5F5;
+  --color-border: #E5E5E5;
+  --color-success: #22C55E;
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  --color-info: #3B82F6;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+/* Transition utilities */
+.transition {
+  transition: all 0.2s ease-in-out;
+}
 
 @tailwind base;
 @tailwind components;

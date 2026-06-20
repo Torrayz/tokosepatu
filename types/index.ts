@@ -86,7 +86,7 @@ export interface Order {
   created_at: string
   updated_at: string
   items?: OrderItem[]
-  payment_proof?: PaymentProof
+  payment_proof?: PaymentProof[]
 }
 
 export interface OrderItem {
