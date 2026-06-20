@@ -158,10 +158,10 @@ const allProducts: Product[] = [
 
   if (price && price !== 'all') {
     filtered = filtered.filter((p) => {
-      if (price === '0-200000') return p.price < 200000
-      if (price === '200000-400000') return p.price >= 200000 && p.price < 400000
-      if (price === '400000-600000') return p.price >= 400000 && p.price < 600000
-      if (price === '600000+') return p.price >= 600000
+      if (price === '0-300000') return p.price < 300000
+      if (price === '300000-500000') return p.price >= 300000 && p.price < 500000
+      if (price === '500000-800000') return p.price >= 500000 && p.price < 800000
+      if (price === '800000+') return p.price >= 800000
       return true
     })
   }
@@ -180,7 +180,7 @@ const allProducts: Product[] = [
 
   const categoryName = category
     ? allProducts.find((p) => p.category?.slug === category)?.category?.name
-    : 'All Products'
+    : 'Semua Produk'
 
   return (
     <>
@@ -193,7 +193,7 @@ const allProducts: Product[] = [
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
               <Link href="/" className="hover:text-primary transition">
-                Home
+                Beranda
               </Link>
               <ChevronRight size={16} />
               <span className="text-foreground font-medium">{categoryName}</span>
@@ -201,7 +201,7 @@ const allProducts: Product[] = [
 
             <div>
               <h1 className="font-heading text-3xl md:text-4xl font-extrabold">{categoryName}</h1>
-              <p className="text-gray-600 mt-2">Showing {filtered.length} products</p>
+              <p className="text-gray-600 mt-2">Menampilkan {filtered.length} produk</p>
             </div>
           </div>
         </div>

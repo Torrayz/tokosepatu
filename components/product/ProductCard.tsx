@@ -29,16 +29,16 @@ export function ProductCard({ product }: ProductCardProps) {
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-wrap gap-2">
             {!hasStock && (
-              <span className="badge badge-error">Out of Stock</span>
+              <span className="badge badge-error">Habis</span>
             )}
             {product.is_featured && (
-              <span className="badge badge-secondary">Featured</span>
+              <span className="badge badge-secondary">Pilihan</span>
             )}
           </div>
 
           {/* Hover Overlay */}
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
-            <button className="btn-secondary">
+            <button className="btn-secondary flex items-center gap-2">
               <ShoppingBag size={20} />
             </button>
           </div>

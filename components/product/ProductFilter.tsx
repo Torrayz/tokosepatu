@@ -13,18 +13,18 @@ const categories = [
 ]
 
 const priceRanges = [
-  { id: 'all', label: 'All Prices' },
-  { id: '0-200000', label: 'Under Rp 200K' },
-  { id: '200000-400000', label: 'Rp 200K - Rp 400K' },
-  { id: '400000-600000', label: 'Rp 400K - Rp 600K' },
-  { id: '600000+', label: 'Over Rp 600K' },
+  { id: 'all', label: 'Semua Harga' },
+  { id: '0-300000', label: '< Rp 300rb' },
+  { id: '300000-500000', label: 'Rp 300rb - 500rb' },
+  { id: '500000-800000', label: 'Rp 500rb - 800rb' },
+  { id: '800000+', label: '> Rp 800rb' },
 ]
 
 const sortOptions = [
-  { id: 'newest', label: 'Newest' },
-  { id: 'price-asc', label: 'Price: Low to High' },
-  { id: 'price-desc', label: 'Price: High to Low' },
-  { id: 'name-asc', label: 'Name: A to Z' },
+  { id: 'newest', label: 'Terbaru' },
+  { id: 'price-asc', label: 'Harga Terendah' },
+  { id: 'price-desc', label: 'Harga Tertinggi' },
+  { id: 'name-asc', label: 'Nama (A - Z)' },
 ]
 
 export function ProductFilter() {
@@ -80,7 +80,7 @@ export function ProductFilter() {
       <div className={`${showFilters ? 'block' : 'hidden'} md:block space-y-6 pb-6 md:pb-0`}>
         {/* Categories */}
         <div>
-          <h3 className="font-heading font-bold text-sm mb-3">Category</h3>
+          <h3 className="font-heading font-bold text-sm mb-3">Kategori</h3>
           <div className="space-y-2">
             {categories.map((cat) => (
               <label key={cat.id} className="flex items-center gap-2 cursor-pointer">
@@ -98,7 +98,7 @@ export function ProductFilter() {
 
         {/* Price Range */}
         <div>
-          <h3 className="font-heading font-bold text-sm mb-3">Price Range</h3>
+          <h3 className="font-heading font-bold text-sm mb-3">Harga</h3>
           <div className="space-y-2">
             {priceRanges.map((range) => (
               <label key={range.id} className="flex items-center gap-2 cursor-pointer">
@@ -118,7 +118,7 @@ export function ProductFilter() {
 
         {/* Sort */}
         <div>
-          <h3 className="font-heading font-bold text-sm mb-3">Sort By</h3>
+          <h3 className="font-heading font-bold text-sm mb-3">Urutkan</h3>
           <div className="space-y-2">
             {sortOptions.map((option) => (
               <label key={option.id} className="flex items-center gap-2 cursor-pointer">
@@ -142,7 +142,7 @@ export function ProductFilter() {
             onClick={clearFilters}
             className="w-full btn-outline mt-4"
           >
-            Clear All Filters
+            Reset Filter
           </button>
         )}
       </div>

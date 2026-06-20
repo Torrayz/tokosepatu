@@ -36,7 +36,7 @@ export function ProductGrid({
   if (isEmpty) {
     return (
       <div className="py-20 text-center">
-        <p className="text-gray-500 text-lg">{emptyMessage}</p>
+        <p className="text-gray-500 text-lg">{emptyMessage || 'Tidak ada produk yang sesuai dengan filter Anda'}</p>
       </div>
     )
   }
