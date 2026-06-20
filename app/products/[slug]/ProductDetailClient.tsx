@@ -8,7 +8,7 @@ import type { Product } from '@/types'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
-  ChevronRight, ShoppingBag, Heart, Star,
+  ChevronRight, Heart, Star,
   Truck, ShieldCheck, RefreshCw, Loader2,
   Plus, Minus
 } from 'lucide-react'
@@ -72,12 +72,12 @@ export function ProductDetailClient({ product, relatedProducts }: Props) {
 
       {/* Product Section */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
 
           {/* ── Gambar ── */}
-          <div className="space-y-4 lg:sticky lg:top-24">
-            {/* Main Image */}
-            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-tr from-gray-100 to-white aspect-square group border border-gray-100/50 shadow-inner">
+          <div className="space-y-4 lg:sticky lg:top-24 lg:col-span-7">
+            {/* Main Image - Frosted Glass Mockup Match */}
+            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#F5F7FA] to-[#E2E8F0] aspect-square group border-2 border-white shadow-inner">
               <Image
                 src={mainImage}
                 alt={product.name}
@@ -119,30 +119,27 @@ export function ProductDetailClient({ product, relatedProducts }: Props) {
           </div>
 
           {/* ── Info Produk ── */}
-          <div className="space-y-6">
+          <div className="flex flex-col gap-8 lg:col-span-5 pt-4">
             {/* Header */}
             <div>
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs font-bold uppercase tracking-widest text-gray-500 bg-white border border-gray-200 px-3 py-1 rounded-full shadow-sm">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-xs font-bold uppercase tracking-widest text-gray-500 bg-white border border-gray-200 px-3 py-1 shadow-sm">
                   {product.category?.name}
                 </span>
                 {/* Rating dummy */}
-                <div className="flex items-center gap-1 text-amber-400 bg-amber-50 px-2 py-1 rounded-full border border-amber-100">
-                  <Star className="w-3.5 h-3.5 fill-amber-400" />
-                  <span className="text-xs font-bold text-amber-700">4.9</span>
-                  <span className="text-xs text-amber-600/70 ml-1">(128 ulasan)</span>
+                <div className="flex items-center gap-1 text-[#0A0A0A] bg-gray-50 px-2 py-1 border border-gray-200">
+                  <Star className="w-3.5 h-3.5 fill-[#0A0A0A]" />
+                  <span className="text-xs font-black">4.8</span>
+                  <span className="text-xs text-gray-500 ml-1">/ 124 REVIEWS</span>
                 </div>
               </div>
-              <h1 className="font-heading text-4xl md:text-5xl font-black text-[#0A0A0A] leading-[1.1] tracking-tight">
+              <h1 className="font-heading text-5xl md:text-6xl font-black text-[#0A0A0A] leading-[0.9] tracking-tighter uppercase mb-4">
                 {product.name}
               </h1>
+              <p className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6">Ultra-Lite Street Performance</p>
+              
               <div className="flex items-center gap-4 mt-6">
-                <p className="font-black text-4xl text-[#0A0A0A] tracking-tight">{formatRupiah(product.price)}</p>
-                {/* Harga coret dummy */}
-                <div className="flex flex-col">
-                  <p className="text-sm text-gray-400 line-through font-semibold">{formatRupiah(Math.round(product.price * 1.15))}</p>
-                  <span className="text-red-500 text-[10px] font-black uppercase tracking-wider">Hemat 15%</span>
-                </div>
+                <p className="font-black text-5xl text-[#0A0A0A] tracking-tighter">{formatRupiah(product.price)}</p>
               </div>
             </div>
 
@@ -187,32 +184,32 @@ export function ProductDetailClient({ product, relatedProducts }: Props) {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col gap-3 border-t border-gray-100 pt-6">
+            <div className="flex flex-col gap-4 border-t-2 border-gray-100 pt-8">
               <div className="flex gap-3">
                 <button
                   onClick={handleAddToCart}
                   disabled={isAdding || !hasStock}
-                  className="flex-1 py-4 rounded-2xl bg-[#E8FF3A] text-[#0A0A0A] font-black uppercase tracking-widest text-sm hover:bg-[#d4e832] transition-colors disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-xl shadow-[#E8FF3A]/20"
+                  className="flex-1 py-5 rounded-sm bg-[#E8FF3A] text-[#0A0A0A] font-black uppercase tracking-widest text-base hover:bg-[#d4e832] transition-colors disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-xl shadow-[#E8FF3A]/20"
                 >
                   {isAdding ? (
                     <><Loader2 className="w-5 h-5 animate-spin" /> Sedang Menambahkan...</>
                   ) : (
-                    <><ShoppingBag className="w-5 h-5" /> Masukkan Keranjang</>
+                    <>TAMBAH KE KERANJANG</>
                   )}
                 </button>
                 <button
                   onClick={() => setWishlist(!wishlist)}
-                  className={`w-[60px] h-[60px] rounded-2xl border-2 flex items-center justify-center transition-all shrink-0 ${
+                  className={`w-[68px] h-[68px] rounded-sm border-2 flex items-center justify-center transition-all shrink-0 ${
                     wishlist
-                      ? 'border-red-400 bg-red-50 text-red-500 shadow-inner'
-                      : 'border-gray-200 hover:border-gray-300 text-gray-400 hover:text-red-400 bg-white shadow-sm'
+                      ? 'border-[#0A0A0A] bg-[#0A0A0A] text-white shadow-inner'
+                      : 'border-gray-200 hover:border-[#0A0A0A] text-[#0A0A0A] bg-white shadow-sm'
                   }`}
                 >
-                  <Heart className={`w-6 h-6 transition-transform ${wishlist ? 'fill-red-400 scale-110' : 'hover:scale-110'}`} />
+                  <Heart className={`w-7 h-7 transition-transform ${wishlist ? 'fill-white scale-110' : 'hover:scale-110'}`} />
                 </button>
               </div>
-              <p className="text-center text-xs font-bold text-green-600 bg-green-50 py-2 rounded-xl border border-green-100">
-                ✨ Pesanan sebelum jam 15:00 akan dikirim hari ini
+              <p className="text-center text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-2">
+                Free Shipping & Returns
               </p>
             </div>
 

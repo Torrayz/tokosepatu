@@ -12,22 +12,25 @@ export function SizeSelector({ sizes, selectedSize, onSelectSize }: SizeSelector
   return (
     <div className="space-y-3">
       <label className="block font-heading font-bold text-sm">Pilih Ukuran</label>
-      <div className="grid grid-cols-7 gap-2">
+      <div className="flex flex-wrap gap-2 mt-3">
         {sizes.map((s) => {
+          const isSelected = selectedSize === s.size
           const isOutOfStock = s.stock === 0
+
           return (
             <button
               key={s.size}
               onClick={() => !isOutOfStock && onSelectSize(s.size)}
               disabled={isOutOfStock}
-              className={`py-2 rounded-button border text-sm font-medium transition ${
-                selectedSize === s.size
-                  ? 'bg-primary text-background border-primary'
+              className={`h-14 w-14 flex flex-col items-center justify-center rounded-sm font-bold text-lg transition-all ${
+                isSelected
+                  ? 'bg-[#0A0A0A] text-white shadow-md scale-105'
                   : isOutOfStock
-                  ? 'bg-gray-100 text-gray-300 border-gray-200 cursor-not-allowed line-through'
-                  : 'border-border hover:border-primary'
+                  ? 'bg-gray-100 text-gray-300 border-2 border-gray-100 cursor-not-allowed line-through'
+                  : 'bg-white text-[#0A0A0A] border-2 border-gray-200 hover:border-gray-800'
               }`}
             >
+              <span className="text-[10px] uppercase text-gray-400 font-medium mb-0.5 leading-none">EU</span>
               {s.size}
             </button>
           )

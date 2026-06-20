@@ -3,7 +3,7 @@
 import { ProductCard } from '@/components/product/ProductCard'
 import type { Product } from '@/types'
 import Link from 'next/link'
-import { ArrowRight, Truck, ShieldCheck, RefreshCw, Headphones, Zap, TrendingUp } from 'lucide-react'
+import { ArrowRight, Truck, ShieldCheck, RefreshCw, Headphones, Zap } from 'lucide-react'
 import Image from 'next/image'
 import { motion, Variants } from 'framer-motion'
 import Marquee from 'react-fast-marquee'
@@ -59,23 +59,19 @@ export default function HomeClient({ featuredProducts }: HomeClientProps) {
               </motion.div>
 
               <motion.div variants={fadeInUp} className="space-y-4">
-                <h1 className="font-heading text-5xl md:text-7xl lg:text-[5rem] font-black leading-[1.05] tracking-tighter">
-                  Jalan<br />
-                  <span className="text-[#E8FF3A] drop-shadow-[0_0_15px_rgba(232,255,58,0.3)]">Dengan</span><br />
-                  Gaya.
+                <h1 className="font-heading text-6xl md:text-8xl lg:text-[7rem] font-black leading-[0.9] tracking-tighter uppercase text-white">
+                  JALAN<br />
+                  DENGAN<br />
+                  GAYA
                 </h1>
-                <p className="text-lg md:text-xl text-white/60 max-w-md leading-relaxed font-medium">
-                  Sepatu premium Indonesia untuk gaya hidup urban yang tak tertandingi.
+                <p className="text-xl md:text-2xl text-white/80 max-w-md leading-relaxed font-medium mt-6">
+                  Definisikan Langkahmu.
                 </p>
               </motion.div>
 
-              <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
-                <Link href="/products" className="group inline-flex items-center gap-2 bg-[#E8FF3A] text-[#0A0A0A] font-black tracking-widest uppercase text-sm px-8 py-4 rounded-2xl hover:bg-[#d4eb2e] transition-all hover:scale-105 shadow-xl shadow-[#E8FF3A]/20">
-                  Belanja Sekarang
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link href="/products" className="inline-flex items-center gap-2 border-2 border-white/20 text-white font-bold px-8 py-4 rounded-2xl hover:bg-white/10 hover:border-white/40 transition-all">
-                  Lihat Katalog
+              <motion.div variants={fadeInUp} className="flex flex-wrap gap-4 pt-4">
+                <Link href="/products" className="group inline-flex items-center gap-3 bg-[#E8FF3A] text-[#0A0A0A] font-black tracking-widest uppercase text-sm px-8 py-4 hover:bg-[#d4eb2e] transition-colors rounded-sm">
+                  BELANJA SEKARANG <ArrowRight className="w-5 h-5 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform rotate-45" />
                 </Link>
               </motion.div>
 
@@ -94,42 +90,28 @@ export default function HomeClient({ featuredProducts }: HomeClientProps) {
               </motion.div>
             </motion.div>
 
-            {/* Gambar Hero - Floating Animation */}
+            {/* Gambar Hero - Floating Animation Match Mockup */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: "easeOut" }}
               className="hidden lg:flex justify-center items-center relative"
             >
-              <div className="absolute inset-0 bg-[#E8FF3A]/5 rounded-[3rem] blur-3xl" />
               <motion.div 
-                animate={{ y: [0, -20, 0] }}
+                animate={{ y: [0, -15, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="relative w-full h-[600px] rounded-[3rem] overflow-hidden border border-white/10 bg-gradient-to-tr from-white/5 to-transparent backdrop-blur-sm"
+                className="relative w-full h-[600px]"
               >
+                {/* Simulated Neon Grid Behind Shoe */}
+                <div className="absolute inset-4 border border-[#E8FF3A]/20 bg-[linear-gradient(rgba(232,255,58,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(232,255,58,0.05)_1px,transparent_1px)] bg-[size:40px_40px] opacity-70" />
+                
                 <Image
                   src="/products/sneaker-runner-pro.png"
                   alt="STRYDE Sneaker"
                   fill
-                  className="object-contain p-10 drop-shadow-[0_30px_30px_rgba(0,0,0,0.5)]"
+                  className="object-contain p-4 drop-shadow-[0_20px_50px_rgba(232,255,58,0.15)] z-10 scale-110 rotate-12"
                   priority
                 />
-              </motion.div>
-              
-              {/* Floating badges with delayed pop */}
-              <motion.div 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.2, duration: 0.5 }}
-                className="absolute top-16 -right-8 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-3xl p-4 shadow-2xl flex items-center gap-4"
-              >
-                <div className="w-12 h-12 bg-[#E8FF3A] rounded-2xl flex items-center justify-center text-[#0A0A0A]">
-                  <TrendingUp className="w-6 h-6" />
-                </div>
-                <div>
-                  <p className="text-xs text-white/60 font-bold uppercase tracking-wider">Terlaris Minggu Ini</p>
-                  <p className="font-black text-sm">Runner Pro Series</p>
-                </div>
               </motion.div>
             </motion.div>
           </div>
