@@ -57,11 +57,11 @@ export default function CartPage() {
             <div className="text-center space-y-6">
               <ShoppingBag size={64} className="mx-auto opacity-20" />
               <div>
-                <h1 className="font-heading text-3xl font-bold mb-2">Your cart is empty</h1>
-                <p className="text-gray-600 mb-8">Start shopping to add items to your cart</p>
+                <h1 className="font-heading text-3xl font-bold mb-2">Keranjang Anda kosong</h1>
+                <p className="text-gray-600 mb-8">Mulai berbelanja untuk menambahkan item ke keranjang Anda</p>
               </div>
               <Link href="/products" className="btn-secondary inline-block">
-                Continue Shopping
+                Lanjut Belanja
               </Link>
             </div>
           </div>
@@ -78,7 +78,7 @@ export default function CartPage() {
 
       <main className="min-h-screen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="font-heading text-3xl font-bold mb-8">Shopping Cart</h1>
+          <h1 className="font-heading text-3xl font-bold mb-8">Keranjang Belanja</h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Cart Items */}
@@ -100,7 +100,7 @@ export default function CartPage() {
                     <Link href={`/products`} className="font-heading font-bold hover:text-primary transition">
                       {item.product_name}
                     </Link>
-                    <p className="text-sm text-gray-600 mt-1">Size: {item.size}</p>
+                    <p className="text-sm text-gray-600 mt-1">Ukuran: {item.size}</p>
                     <p className="font-heading font-extrabold text-base mt-2">
                       {formatCurrency(item.price)}
                     </p>
@@ -142,7 +142,7 @@ export default function CartPage() {
             {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="card sticky top-24 space-y-4">
-                <h2 className="font-heading font-bold text-lg">Order Summary</h2>
+                <h2 className="font-heading font-bold text-lg">Ringkasan Pesanan</h2>
 
                 <div className="space-y-3 border-b border-border pb-4">
                   <div className="flex justify-between text-sm">
@@ -150,12 +150,12 @@ export default function CartPage() {
                     <span className="font-medium">{formatCurrency(subtotal)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Tax (10%)</span>
+                    <span className="text-gray-600">Pajak (10%)</span>
                     <span className="font-medium">{formatCurrency(tax)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Shipping</span>
-                    <span className="font-medium text-success">FREE</span>
+                    <span className="text-gray-600">Ongkos kirim</span>
+                    <span className="font-medium text-success">Gratis</span>
                   </div>
                 </div>
 
@@ -165,12 +165,12 @@ export default function CartPage() {
                 </div>
 
                 <Link href="/checkout" className="btn-secondary w-full text-center flex items-center justify-center gap-2">
-                  Proceed to Checkout
+                  Lanjut ke Checkout
                   <ArrowRight size={18} />
                 </Link>
 
                 <Link href="/products" className="btn-outline w-full text-center">
-                  Continue Shopping
+                  Lanjut Belanja
                 </Link>
               </div>
             </div>

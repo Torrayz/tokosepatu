@@ -11,7 +11,7 @@ interface SizeSelectorProps {
 export function SizeSelector({ sizes, selectedSize, onSelectSize }: SizeSelectorProps) {
   return (
     <div className="space-y-3">
-      <label className="block font-heading font-bold text-sm">Select Size</label>
+      <label className="block font-heading font-bold text-sm">Pilih Ukuran</label>
       <div className="grid grid-cols-4 gap-2">
         {sizes.map((size) => {
           const isAvailable = size.stock > 0
