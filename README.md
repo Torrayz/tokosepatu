@@ -1,6 +1,23 @@
 # STRYDE - Indonesian Shoe Brand E-Commerce Platform
 
-A complete, production-ready e-commerce web application for **STRYDE** — an Indonesian shoe brand with the tagline **"Walk Your Way"**. Built with Next.js 14, TypeScript, Tailwind CSS, Supabase (PostgreSQL & Auth), and Zustand.
+A complete, production-ready e-commerce web application for **STRYDE** — an Indonesian shoe brand with the tagline **"Walk Your Way"**. Built with Next.js 14, TypeScript, Tailwind CSS, Supabase (PostgreSQL & Auth), Framer Motion, and Zustand.
+
+## 📸 UI Previews
+
+<div align="center">
+  <img src="docs/homepage.png" alt="STRYDE Homepage UI" width="800" style="border-radius:12px; margin-bottom:20px;" />
+  <p><em>Homepage with Framer Motion animations, Streetwear Aesthetic, and Infinite Marquee</em></p>
+  
+  <br/>
+  
+  <img src="docs/product.png" alt="STRYDE Product Detail UI" width="800" style="border-radius:12px; margin-bottom:20px;" />
+  <p><em>Premium Product Detail Page with Glassmorphism and High-Contrast Typography</em></p>
+
+  <br/>
+  
+  <img src="docs/admin.png" alt="STRYDE Admin Dashboard" width="800" style="border-radius:12px; margin-bottom:20px;" />
+  <p><em>Modern Admin Dashboard for managing products, orders, and viewing revenue statistics</em></p>
+</div>
 
 ## Project Overview
 
