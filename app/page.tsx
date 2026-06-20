@@ -121,20 +121,21 @@ export default function Home() {
               <div className="space-y-6">
                 <div className="space-y-4">
                   <h1 className="font-heading text-4xl md:text-6xl font-extrabold leading-tight">
-                    Walk Your Way
+                    <span>Jalan </span>
+                    <span className="text-secondary">Dengan Gaya</span>
                   </h1>
                   <p className="text-lg text-gray-600 max-w-md">
-                    Premium Indonesian footwear crafted for the modern lifestyle. From sneakers to formal wear, find your perfect stride with STRYDE.
+                    Sepatu premium Indonesia yang dirancang untuk gaya hidup modern. Dari sneakers hingga formal, temukan langkah sempurna Anda bersama STRYDE.
                   </p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link href="/products" className="btn-secondary inline-flex items-center justify-center gap-2">
-                    Shop Now
+                    Belanja Sekarang
                     <ArrowRight size={18} />
                   </Link>
                   <button className="btn-outline">
-                    Learn More
+                    Pelajari Lebih
                   </button>
                 </div>
 
@@ -142,15 +143,15 @@ export default function Home() {
                 <div className="flex gap-8 pt-4">
                   <div>
                     <p className="font-heading font-extrabold text-2xl">500+</p>
-                    <p className="text-xs text-gray-600">Products</p>
+                    <p className="text-xs text-gray-600">Produk</p>
                   </div>
                   <div>
                     <p className="font-heading font-extrabold text-2xl">10K+</p>
-                    <p className="text-xs text-gray-600">Happy Customers</p>
+                    <p className="text-xs text-gray-600">Pelanggan Puas</p>
                   </div>
                   <div>
                     <p className="font-heading font-extrabold text-2xl">100%</p>
-                    <p className="text-xs text-gray-600">Authentic</p>
+                    <p className="text-xs text-gray-600">Asli</p>
                   </div>
                 </div>
               </div>
@@ -175,11 +176,11 @@ export default function Home() {
             {/* Header */}
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="font-heading text-3xl md:text-4xl font-extrabold">Featured Collection</h2>
-                <p className="text-gray-600 mt-2">Discover our latest and most-loved shoes</p>
+                <h2 className="font-heading text-3xl md:text-4xl font-extrabold">Pilihan Unggulan</h2>
+                <p className="text-gray-600 mt-2">Temukan koleksi sepatu terbaru dan favorit kami</p>
               </div>
               <Link href="/products" className="hidden sm:flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all">
-                View All
+                Lihat Semua
                 <ArrowRight size={20} />
               </Link>
             </div>
@@ -193,7 +194,7 @@ export default function Home() {
 
             {/* Mobile CTA */}
             <Link href="/products" className="sm:hidden btn-secondary w-full text-center py-3">
-              View All Products
+              Lihat Semua Produk
             </Link>
           </div>
         </section>
@@ -201,21 +202,21 @@ export default function Home() {
         {/* Category Preview Section */}
         <section className="bg-muted">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-            <h2 className="font-heading text-3xl font-extrabold mb-12 text-center">Shop by Category</h2>
+            <h2 className="font-heading text-3xl font-extrabold mb-12 text-center">Belanja Berdasarkan Kategori</h2>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {[
                 { name: 'Sneakers', slug: 'sneakers', icon: '👟' },
                 { name: 'Casual', slug: 'casual', icon: '🥾' },
                 { name: 'Formal', slug: 'formal', icon: '👞' },
-                { name: 'Sandals', slug: 'sandal', icon: '🩴' },
-                { name: 'Boots', slug: 'boots', icon: '🔴' },
+                { name: 'Sandal', slug: 'sandal', icon: '🩴' },
+                { name: 'Boots', slug: 'boots', icon: '👢' },
               ].map((category) => (
                 <Link
                   key={category.slug}
                   href={`/products?category=${category.slug}`}
                   className="group card hover:border-primary transition text-center"
                 >
-                  <div className="text-4xl mb-3">👟</div>
+                  <div className="text-4xl mb-3">{category.icon}</div>
                   <h3 className="font-heading font-bold text-sm group-hover:text-primary transition">
                     {category.name}
                   </h3>
@@ -228,12 +229,12 @@ export default function Home() {
         {/* CTA Section */}
         <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
           <div className="bg-primary text-background rounded-card p-12 text-center space-y-6">
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold">Ready to Walk Your Way?</h2>
+            <h2 className="font-heading text-3xl md:text-4xl font-extrabold">Siap Jalan Dengan Gaya?</h2>
             <p className="text-lg opacity-90 max-w-2xl mx-auto">
-              Explore our complete collection of premium footwear and find the perfect shoe for any occasion.
+              Jelajahi koleksi lengkap sepatu premium kami dan temukan sepatu yang sempurna untuk setiap kesempatan.
             </p>
             <Link href="/products" className="inline-block btn-secondary">
-              Start Shopping
+              Mulai Belanja
             </Link>
           </div>
         </section>

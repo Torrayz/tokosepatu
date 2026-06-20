@@ -83,10 +83,10 @@ export default function CheckoutPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Shipping Information */}
                 <div className="card">
-                  <h2 className="font-heading font-bold text-lg mb-4">Shipping Information</h2>
+                  <h2 className="font-heading font-bold text-lg mb-4">Alamat Pengiriman</h2>
                   <div className="space-y-4">
                     <div>
-                      <label className="block font-medium text-sm mb-2">Full Name *</label>
+                      <label className="block font-medium text-sm mb-2">Nama Penerima *</label>
                       <input
                         type="text"
                         name="name"
@@ -98,7 +98,7 @@ export default function CheckoutPage() {
                     </div>
 
                     <div>
-                      <label className="block font-medium text-sm mb-2">Phone Number *</label>
+                      <label className="block font-medium text-sm mb-2">Nomor Telepon *</label>
                       <input
                         type="tel"
                         name="phone"
@@ -110,7 +110,7 @@ export default function CheckoutPage() {
                     </div>
 
                     <div>
-                      <label className="block font-medium text-sm mb-2">Address *</label>
+                      <label className="block font-medium text-sm mb-2">Alamat Lengkap *</label>
                       <input
                         type="text"
                         name="address"
@@ -123,7 +123,7 @@ export default function CheckoutPage() {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block font-medium text-sm mb-2">City *</label>
+                        <label className="block font-medium text-sm mb-2">Kota *</label>
                         <input
                           type="text"
                           name="city"
@@ -135,14 +135,14 @@ export default function CheckoutPage() {
                       </div>
 
                       <div>
-                        <label className="block font-medium text-sm mb-2">Province *</label>
+                        <label className="block font-medium text-sm mb-2">Provinsi *</label>
                         <select
                           name="province"
                           value={formData.province}
                           onChange={handleInputChange}
                           className="w-full border border-border rounded-button px-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary"
                         >
-                          <option value="">Select Province</option>
+                          <option value="">Pilih Provinsi</option>
                           {provinces.map((prov) => (
                             <option key={prov.id} value={prov.id}>
                               {prov.name}
@@ -153,7 +153,7 @@ export default function CheckoutPage() {
                     </div>
 
                     <div>
-                      <label className="block font-medium text-sm mb-2">Postal Code *</label>
+                      <label className="block font-medium text-sm mb-2">Kode Pos *</label>
                       <input
                         type="text"
                         name="postal"
@@ -166,12 +166,12 @@ export default function CheckoutPage() {
                     </div>
 
                     <div>
-                      <label className="block font-medium text-sm mb-2">Notes (Optional)</label>
+                      <label className="block font-medium text-sm mb-2">Catatan Kurir (Opsional)</label>
                       <textarea
                         name="notes"
                         value={formData.notes}
                         onChange={handleInputChange}
-                        placeholder="Any special instructions for delivery..."
+                        placeholder="Instruksi khusus untuk pengiriman..."
                         rows={3}
                         className="w-full border border-border rounded-button px-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary"
                       />
@@ -181,7 +181,7 @@ export default function CheckoutPage() {
 
                 {/* Payment Method */}
                 <div className="card">
-                  <h2 className="font-heading font-bold text-lg mb-4">Payment Method</h2>
+                  <h2 className="font-heading font-bold text-lg mb-4">Metode Pembayaran</h2>
                   <div className="space-y-3">
                     <label className="flex items-center gap-3 p-3 border border-border rounded-button cursor-pointer hover:bg-muted transition">
                       <input
@@ -193,8 +193,8 @@ export default function CheckoutPage() {
                         className="w-4 h-4 accent-secondary"
                       />
                       <div>
-                        <p className="font-medium">Cash on Delivery (COD)</p>
-                        <p className="text-sm text-gray-600">Pay when you receive your order</p>
+                        <p className="font-medium">COD (Bayar di Tempat)</p>
+                        <p className="text-sm text-gray-600">Bayar tunai saat barang tiba</p>
                       </div>
                     </label>
 
@@ -208,8 +208,8 @@ export default function CheckoutPage() {
                         className="w-4 h-4 accent-secondary"
                       />
                       <div>
-                        <p className="font-medium">Bank Transfer</p>
-                        <p className="text-sm text-gray-600">BCA: 1234567890 a.n. STRYDE</p>
+                        <p className="font-medium">Transfer Bank</p>
+                        <p className="text-sm text-gray-600">BCA 1234567890 a.n. STRYDE Indonesia</p>
                       </div>
                     </label>
                   </div>
@@ -221,7 +221,7 @@ export default function CheckoutPage() {
                   disabled={isSubmitting}
                   className="btn-secondary w-full flex items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Creating Order...' : 'Create Order'}
+                  {isSubmitting ? 'Membuat Pesanan...' : 'Buat Pesanan'}
                   <ArrowRight size={18} />
                 </button>
               </form>
@@ -230,15 +230,15 @@ export default function CheckoutPage() {
             {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="card sticky top-24 space-y-4">
-                <h2 className="font-heading font-bold text-lg">Order Summary</h2>
+                <h2 className="font-heading font-bold text-lg">Ringkasan Pesanan</h2>
 
                 <div className="space-y-2 text-sm pb-4 border-b border-border">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">2 Items</span>
+                    <span className="text-gray-600">2 Item</span>
                     <span className="font-medium">{formatCurrency(mockCartTotal - 100000)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Tax</span>
+                    <span className="text-gray-600">Pajak</span>
                     <span className="font-medium">{formatCurrency(100000)}</span>
                   </div>
                 </div>
@@ -249,7 +249,7 @@ export default function CheckoutPage() {
                 </div>
 
                 <Link href="/cart" className="btn-outline w-full text-center text-sm">
-                  Back to Cart
+                  Kembali ke Keranjang
                 </Link>
               </div>
             </div>

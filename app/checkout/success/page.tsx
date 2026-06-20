@@ -14,36 +14,36 @@ export default function CheckoutSuccessPage() {
             <CheckCircle2 size={64} className="mx-auto text-success" />
             
             <div>
-              <h1 className="font-heading text-3xl font-bold mb-2">Order Confirmed!</h1>
-              <p className="text-gray-600">Thank you for your purchase. Your order has been created successfully.</p>
+              <h1 className="font-heading text-3xl font-bold mb-2">Pesanan Berhasil Dibuat!</h1>
+              <p className="text-gray-600">Terima kasih telah berbelanja. Pesanan Anda telah berhasil dibuat.</p>
             </div>
 
             <div className="bg-muted rounded-card p-4 text-left space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Order ID</span>
+                <span className="text-gray-600">ID Pesanan</span>
                 <span className="font-medium font-mono">#STR20240620001</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Payment Method</span>
-                <span className="font-medium">Cash on Delivery</span>
+                <span className="text-gray-600">Metode Pembayaran</span>
+                <span className="font-medium">Bayar di Tempat (COD)</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Total Amount</span>
+                <span className="text-gray-600">Total</span>
                 <span className="font-medium">Rp 950.000</span>
               </div>
             </div>
 
             <div className="bg-info/10 border border-info rounded-card p-4 text-left text-sm text-info">
-              <p>We&apos;ll send you an email confirmation shortly. You can track your order status in your account.</p>
+              <p>Tim kami akan menghubungi kamu untuk konfirmasi pengiriman. Kamu dapat melacak status pesanan di akun kamu.</p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-4">
               <Link href="/orders" className="btn-secondary flex-1 flex items-center justify-center gap-2">
-                View Order
+                Lihat Pesanan
                 <ArrowRight size={18} />
               </Link>
               <Link href="/products" className="btn-outline flex-1">
-                Continue Shopping
+                Lanjut Belanja
               </Link>
             </div>
           </div>

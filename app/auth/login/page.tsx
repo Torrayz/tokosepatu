@@ -24,7 +24,7 @@ export default function LoginPage() {
     e.preventDefault()
     
     if (!formData.email || !formData.password) {
-      toast.error('Please fill in all fields')
+      toast.error('Mohon isi semua bidang')
       return
     }
 
@@ -33,7 +33,7 @@ export default function LoginPage() {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false)
-      toast.success('Logged in successfully!')
+      toast.success('Berhasil masuk!')
       router.push('/')
     }, 1000)
   }
@@ -48,8 +48,8 @@ export default function LoginPage() {
           <div className="card bg-background space-y-6">
             {/* Header */}
             <div className="text-center">
-              <h1 className="font-heading text-2xl font-bold">Welcome Back</h1>
-              <p className="text-gray-600 text-sm mt-2">Sign in to your STRYDE account</p>
+              <h1 className="font-heading text-2xl font-bold">Masuk ke Akun</h1>
+              <p className="text-gray-600 text-sm mt-2">Masuk ke akun STRYDE Anda</p>
             </div>
 
             {/* Form */}
@@ -61,13 +61,13 @@ export default function LoginPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="you@example.com"
+                  placeholder="anda@contoh.com"
                   className="w-full border border-border rounded-button px-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Password</label>
+                <label className="block text-sm font-medium mb-2">Kata Sandi</label>
                 <input
                   type="password"
                   name="password"
@@ -83,7 +83,7 @@ export default function LoginPage() {
                 disabled={isLoading}
                 className="btn-secondary w-full disabled:opacity-50"
               >
-                {isLoading ? 'Signing in...' : 'Sign In'}
+                {isLoading ? 'Sedang Masuk...' : 'Masuk'}
               </button>
             </form>
 
@@ -93,7 +93,7 @@ export default function LoginPage() {
                 <div className="w-full border-t border-border"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-background text-gray-600">or</span>
+                <span className="px-2 bg-background text-gray-600">atau</span>
               </div>
             </div>
 
@@ -102,19 +102,19 @@ export default function LoginPage() {
               <button
                 onClick={() => {
                   setFormData({ email: 'demo@stryde.id', password: 'Demo123!' })
-                  toast.info('Demo account credentials filled')
+                  toast.info('Kredensial akun demo telah diisi')
                 }}
                 className="w-full btn-outline"
               >
-                Try Demo Account
+                Coba Akun Demo
               </button>
             </div>
 
             {/* Footer */}
             <div className="text-center text-sm">
-              <span className="text-gray-600">Don&apos;t have an account? </span>
+              <span className="text-gray-600">Belum punya akun? </span>
               <Link href="/auth/register" className="text-primary font-medium hover:opacity-70">
-                Sign up
+                Daftar
               </Link>
             </div>
           </div>

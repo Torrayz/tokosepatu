@@ -26,17 +26,17 @@ export default function RegisterPage() {
     e.preventDefault()
     
     if (!formData.fullName || !formData.email || !formData.password || !formData.confirmPassword) {
-      toast.error('Please fill in all fields')
+      toast.error('Mohon isi semua bidang')
       return
     }
 
     if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match')
+      toast.error('Kata sandi tidak sesuai')
       return
     }
 
     if (formData.password.length < 8) {
-      toast.error('Password must be at least 8 characters')
+      toast.error('Kata sandi minimal 8 karakter')
       return
     }
 
@@ -45,7 +45,7 @@ export default function RegisterPage() {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false)
-      toast.success('Account created successfully!')
+      toast.success('Akun berhasil dibuat!')
       router.push('/auth/login')
     }, 1000)
   }
@@ -60,14 +60,14 @@ export default function RegisterPage() {
           <div className="card bg-background space-y-6">
             {/* Header */}
             <div className="text-center">
-              <h1 className="font-heading text-2xl font-bold">Create Account</h1>
-              <p className="text-gray-600 text-sm mt-2">Join STRYDE and start shopping</p>
+              <h1 className="font-heading text-2xl font-bold">Buat Akun</h1>
+              <p className="text-gray-600 text-sm mt-2">Bergabung dengan STRYDE dan mulai berbelanja</p>
             </div>
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-2">Full Name</label>
+                <label className="block text-sm font-medium mb-2">Nama Lengkap</label>
                 <input
                   type="text"
                   name="fullName"
@@ -85,13 +85,13 @@ export default function RegisterPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="you@example.com"
+                  placeholder="anda@contoh.com"
                   className="w-full border border-border rounded-button px-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Password</label>
+                <label className="block text-sm font-medium mb-2">Kata Sandi</label>
                 <input
                   type="password"
                   name="password"
@@ -100,11 +100,11 @@ export default function RegisterPage() {
                   placeholder="••••••••"
                   className="w-full border border-border rounded-button px-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary"
                 />
-                <p className="text-xs text-gray-600 mt-1">At least 8 characters</p>
+                <p className="text-xs text-gray-600 mt-1">Minimal 8 karakter</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Confirm Password</label>
+                <label className="block text-sm font-medium mb-2">Konfirmasi Kata Sandi</label>
                 <input
                   type="password"
                   name="confirmPassword"
@@ -120,27 +120,28 @@ export default function RegisterPage() {
                 disabled={isLoading}
                 className="btn-secondary w-full disabled:opacity-50"
               >
-                {isLoading ? 'Creating Account...' : 'Create Account'}
+                {isLoading ? 'Membuat Akun...' : 'Daftar'}
               </button>
             </form>
 
             {/* Terms */}
             <p className="text-xs text-gray-600 text-center">
-              By creating an account, you agree to our{' '}
+              Dengan membuat akun, kamu setuju dengan{' '}
               <a href="#" className="text-primary hover:opacity-70">
-                Terms of Service
+                Syarat Layanan
               </a>{' '}
-              and{' '}
+              dan{' '}
               <a href="#" className="text-primary hover:opacity-70">
-                Privacy Policy
-              </a>
+                Kebijakan Privasi
+              </a>{' '}
+              kami
             </p>
 
             {/* Footer */}
             <div className="text-center text-sm">
-              <span className="text-gray-600">Already have an account? </span>
+              <span className="text-gray-600">Sudah punya akun? </span>
               <Link href="/auth/login" className="text-primary font-medium hover:opacity-70">
-                Sign in
+                Masuk
               </Link>
             </div>
           </div>

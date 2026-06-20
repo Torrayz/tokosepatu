@@ -39,13 +39,13 @@ export default function OrdersPage() {
 
       <main className="min-h-screen">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="font-heading text-3xl font-bold mb-8">My Orders</h1>
+          <h1 className="font-heading text-3xl font-bold mb-8">Pesanan Saya</h1>
 
           {mockOrders.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-600 mb-4">You don&apos;t have any orders yet</p>
+              <p className="text-gray-600 mb-4">Kamu belum memiliki pesanan</p>
               <Link href="/products" className="btn-secondary inline-block">
-                Start Shopping
+                Mulai Belanja
               </Link>
             </div>
           ) : (
@@ -64,7 +64,7 @@ export default function OrdersPage() {
                       </span>
                     </div>
                     <p className="text-sm text-gray-600">
-                      {formatDate(order.date)} • {order.items_count} item{order.items_count > 1 ? 's' : ''}
+                      {formatDate(order.date)} • {order.items_count} item
                     </p>
                   </div>
                   <div className="flex items-center gap-4">

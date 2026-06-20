@@ -257,7 +257,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                   className="flex-1 btn-secondary inline-flex items-center justify-center gap-2"
                 >
                   <ShoppingBag size={20} />
-                  Add to Cart
+                  Tambah ke Keranjang
                 </button>
                 <button className="w-12 h-12 rounded-button border border-border hover:bg-muted transition flex items-center justify-center">
                   <Heart size={20} />
@@ -269,22 +269,22 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                 <div className="flex gap-3">
                   <div className="text-2xl">🚚</div>
                   <div>
-                    <p className="font-medium text-sm">Free Shipping</p>
-                    <p className="text-xs text-gray-600">On orders over Rp 500.000</p>
+                    <p className="font-medium text-sm">Pengiriman Gratis</p>
+                    <p className="text-xs text-gray-600">Untuk pembelian di atas Rp 500.000</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <div className="text-2xl">✓</div>
                   <div>
-                    <p className="font-medium text-sm">Authentic Guarantee</p>
-                    <p className="text-xs text-gray-600">100% original products</p>
+                    <p className="font-medium text-sm">Garansi Keaslian</p>
+                    <p className="text-xs text-gray-600">100% produk original</p>
                   </div>
                 </div>
                 <div className="flex gap-3">
                   <div className="text-2xl">↩️</div>
                   <div>
-                    <p className="font-medium text-sm">Easy Returns</p>
-                    <p className="text-xs text-gray-600">30-day return policy</p>
+                    <p className="font-medium text-sm">Pengembalian Mudah</p>
+                    <p className="text-xs text-gray-600">Kebijakan pengembalian 30 hari</p>
                   </div>
                 </div>
               </div>
@@ -295,7 +295,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
         {/* Related Products */}
         <div className="bg-muted mt-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-            <h2 className="font-heading text-2xl font-bold mb-8">You Might Also Like</h2>
+            <h2 className="font-heading text-2xl font-bold mb-8">Produk Serupa</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {allProducts
                 .filter((p) => p.id !== product.id && p.category_id === product.category_id)
